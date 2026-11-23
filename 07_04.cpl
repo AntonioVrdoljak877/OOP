@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+class Inventory {
+private:
+    std::vector<std::string> predmeti;
+    int maxBroj;
+
+public:
+    Inventory(int kapacitet) : maxBroj(kapacitet) {}
+
+    Inventory& operator+=(const std::string& predmet) {
+        if ((int)predmeti.size() < maxBroj) {
+            predmeti.push_back(predmet);
+        }
+        return *this;
+    }
+
+    std::string& operator[](int i) {
+        return predmeti[i];
+    }
+
+    const std::string& operator[](int i) const {
+        return predmeti[i];
+    }
+
+    int size() const {
+        return (int)predmeti.size();
+    }
+
+    explicit operator bool() const {
+        return !predmeti.empty();
+    }
+};
+
+void show(const Inventory& inv) {
+    for (int i = 0; i < inv.size(); i++) {
+        std::cout << inv[i] << " ";
+    }
+    std::cout << std::endl;
+}
